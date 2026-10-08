@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Poppins', sans-serif;
+  --font-mono: 'Press Start 2P', monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-800 transition-colors duration-300;
+  }
+  
+  .dark body {
+    @apply bg-slate-900 text-slate-200;
+  }
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.card-glare {
+  background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.4) 25%, transparent 30%, transparent 45%, rgba(255,255,255,0.3) 50%, transparent 55%);
+  background-size: 200% 200%;
+}
+
+.custom-shadow {
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+}
+.dark .custom-shadow {
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+}
