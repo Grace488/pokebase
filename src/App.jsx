@@ -5,6 +5,7 @@ import TypeFilter from './components/TypeFilter';
 import PokemonCard from './components/PokemonCard';
 import PokemonModal from './components/PokemonModal';
 import SkeletonCard from './components/SkeletonCard';
+import PackOpener from './components/PackOpener';
 import { usePokemon } from './hooks/usePokemon';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
   });
   const [showFavorites, setShowFavorites] = useState(false);
   const [sortBy, setSortBy] = useState('id'); // id, name, hp
+  const [currentView, setCurrentView] = useState('pokedex');
 
   useEffect(() => {
     localStorage.setItem('pokemon-favorites', JSON.stringify(favorites));
@@ -76,11 +78,13 @@ function App() {
 
   return (
     <div className="min-h-screen font-sans" style={{ fontFamily: 'var(--font-sans), sans-serif' }}>
-      <Header />
+      <Header currentView={currentView} setCurrentView={setCurrentView} />
       
       <main className="container mx-auto px-4 py-8">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
-          <div className="w-full md:w-1/2">
+        {currentView === 'pokedex' ? (
+          <>
+            <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
+              <div className="w-full md:w-1/2">
             <SearchBar onSearch={handleSearch} />
           </div>
           
@@ -177,6 +181,15 @@ function App() {
               Muat Lebih Banyak
             </button>
           </div>
+        )}
+          </>
+        ) : (
+          <PackOpener 
+            pokemonList={pokemon} 
+            toggleFavorite={toggleFavorite} 
+            favorites={favorites} 
+            onCardClick={setSelectedPokemon} 
+          />
         )}
       </main>
 

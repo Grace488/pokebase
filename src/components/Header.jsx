@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const Header = () => {
+const Header = ({ currentView, setCurrentView }) => {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -69,6 +69,30 @@ const Header = () => {
             </motion.div>
           </div>
         </motion.div>
+
+        {/* Navigation Tabs */}
+        <div className="flex gap-4 mt-8 z-10">
+          <button
+            onClick={() => setCurrentView('pokedex')}
+            className={`px-6 py-2 rounded-full font-bold transition-all backdrop-blur-md ${
+              currentView === 'pokedex'
+                ? 'bg-white text-indigo-900 shadow-[0_0_15px_rgba(255,255,255,0.5)]'
+                : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
+            }`}
+          >
+            Pokédex
+          </button>
+          <button
+            onClick={() => setCurrentView('gacha')}
+            className={`px-6 py-2 rounded-full font-bold transition-all backdrop-blur-md flex items-center gap-2 ${
+              currentView === 'gacha'
+                ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white shadow-[0_0_15px_rgba(250,204,21,0.5)] border-none'
+                : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
+            }`}
+          >
+            <span>✨</span> Buka Pack
+          </button>
+        </div>
       </div>
 
       {/* Fluid SVG Wave Divider (Smooth Curve) */}
